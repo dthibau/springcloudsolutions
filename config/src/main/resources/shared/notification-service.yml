@@ -6,3 +6,11 @@ notification:
   host: localhost
   username: fake
   password: fake
+
+    
+---
+spring:
+  profiles: replica
+
+server:
+  port: 9091 
