@@ -1,0 +1,11 @@
+# Spring properties
+spring:
+  application:
+     name: documents    
+     
+      
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: true
+      
