@@ -1,0 +1,4 @@
+
+# Refresh properties
+curl -XPOST -H "Content-Type: application/json"  http://localhost:3333/actuator/refresh
+
