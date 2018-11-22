@@ -17,6 +17,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableFeignClients
+@EnableCircuitBreaker
 public class MembersServer {
 
 

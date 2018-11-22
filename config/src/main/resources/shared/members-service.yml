@@ -7,8 +7,9 @@ feign:
       default:
         connect-timeout: 50000
         read-timeout: 50000
- 
-
+  hystrix:
+    enabled: true
+    
 logging.level.org.formation.client.NotificationClient : WARN
  
 
