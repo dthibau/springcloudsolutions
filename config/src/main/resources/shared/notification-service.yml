@@ -2,7 +2,7 @@ server:
   port: 9090
 
 notification:
-  host: localhost
   port: 2525
-  username: stageojen@plbformation.com
-  password: stageojen
+  host: localhost
+  username: fake
+  password: fake

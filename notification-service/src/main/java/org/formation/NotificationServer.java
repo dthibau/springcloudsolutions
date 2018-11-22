@@ -27,6 +27,9 @@ public class NotificationServer {
 	@Autowired
 	MailConfiguration mailConfiguration;
 	
+	@Autowired
+	MailConfigurationProperties mailConfigurationProperties;
+	
 	protected Logger logger = Logger.getLogger(NotificationServer.class.getName());
 
 	/**
@@ -44,14 +47,13 @@ public class NotificationServer {
 	@Bean
 	public JavaMailSender getJavaMailSender() {
 	    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-//	    mailSender.setHost("smtp.plbformation.com");
-//	    mailSender.setPort(587);
+
 	    
-	    mailSender.setHost(mailConfiguration.getHost().toString());
-	    mailSender.setPort(mailConfiguration.getPort());
+	    mailSender.setHost(mailConfigurationProperties.getHost());
+	    mailSender.setPort(mailConfigurationProperties.getPort());
 	     
-	    mailSender.setUsername(mailConfiguration.getUsername());
-	    mailSender.setPassword(mailConfiguration.getPassword());
+	    mailSender.setUsername(mailConfigurationProperties.getUsername());
+	    mailSender.setPassword(mailConfigurationProperties.getPassword());
 	     
 	    Properties props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");

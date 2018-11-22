@@ -16,6 +16,7 @@ management:
         - metrics
         - httptrace
         - refresh
+        - mappings
   endpoint:
     health:
       show-details: always
