@@ -1,0 +1,22 @@
+<form id="greetForm">
+	<div class="form-group">
+		<label for="email">Email address:</label> <input
+			[(ngModel)]="membre.email" class="form-control" name="email" type="email" />
+	</div>
+	<div class="form-group">
+		<label for="pwd">Password:</label> <input type="password"
+			[(ngModel)]="membre.password" class="form-control" name="pwd" />
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<button id="add" (click)="onEnter()">Enter</button>
+
+		</div>
+		<div class="col-sm-6">
+			Pas encore membre ?
+			<button id="register" (click)="onRegister()">Inscrivez vous</button>
+			<h2>{{membre.nom}} details!</h2>
+		</div>
+	</div>
+
+</form>

@@ -3,7 +3,7 @@ server:
 
 notification:
   port: 2525
-  host: localhost
+  host: fake-smtp
   username: fake
   password: fake
 
