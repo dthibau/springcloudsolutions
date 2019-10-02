@@ -20,7 +20,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://annuaire:1112/eureka/
-
+    registerWithEureka: true
+    fetchRegistry: true
 
 ---
 spring:
@@ -33,7 +34,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://annuaire:1111/eureka/
-         
+    registerWithEureka: true
+    fetchRegistry: true        
 
   
     

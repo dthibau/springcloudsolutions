@@ -2,11 +2,7 @@ version: '2'
 services:
   config:
     build: ./config/
-    healthcheck:
-        test: curl -f http://localhost:8888/proxy/default && echo 'cool, it works'
-        interval: 10s
-        timeout: 10s
-        retries: 5
+    restart: always
     networks:
      - back
     ports:
@@ -17,37 +13,37 @@ services:
      - back
     ports:
      - "1111:1111"
-    depends_on: 
-      config:
-        condition: service_healthy
+    restart: always
+    depends_on:
+      - config
   document-service:
     build: ./document-service/
     networks:
      - back
-    depends_on: 
-      config:
-        condition: service_healthy
+    restart: always
+    depends_on:
+      - config
   notification-service:
     build: ./notification-service/
     networks:
      - back
-    depends_on: 
-      config:
-        condition: service_healthy
+    restart: always
+    depends_on:
+      - config
   members-service:
     build: ./members-service/
     networks:
       - back
-    depends_on: 
-      config:
-        condition: service_healthy
+    restart: always
+    depends_on:
+      - config
   turbine:
     build: ./turbine/
     networks:
       - back
-    depends_on: 
-      config:
-        condition: service_healthy
+    restart: always
+    depends_on:
+      - config
     ports:
      - "5555:5555"
   proxy:
@@ -57,9 +53,9 @@ services:
       - back
     ports:
       - 8081:8081
-    depends_on: 
-      config:
-        condition: service_healthy
+    restart: always
+    depends_on:
+      - config
   fake-smtp:
     build: ./fake-smtp/
     networks:
