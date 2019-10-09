@@ -3,8 +3,8 @@ package org.formation;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @EnableEurekaClient
 public class NotificationServer {
 
-
+	@Autowired
+	MailConfiguration mailConfiguration;
+	
 	protected Logger logger = Logger.getLogger(NotificationServer.class.getName());
 
 	/**
@@ -45,11 +47,11 @@ public class NotificationServer {
 //	    mailSender.setHost("smtp.plbformation.com");
 //	    mailSender.setPort(587);
 	    
-	    mailSender.setHost("localhost");
-	    mailSender.setPort(26);
+	    mailSender.setHost(mailConfiguration.getHost().toString());
+	    mailSender.setPort(mailConfiguration.getPort());
 	     
-	    mailSender.setUsername("stageojen@plbformation.com");
-	    mailSender.setPassword("stageojen");
+	    mailSender.setUsername(mailConfiguration.getUsername());
+	    mailSender.setPassword(mailConfiguration.getPassword());
 	     
 	    Properties props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");

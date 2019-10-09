@@ -5,11 +5,13 @@ import java.net.URL;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 @ConfigurationProperties(prefix = "notification")
 public class MailConfiguration {
 
-	private URL host;
+	private String host;
 	private int port;
 	private String username, password;
 
@@ -18,11 +20,11 @@ public class MailConfiguration {
 
 	private boolean auth, startls, debug;
 
-	public URL getHost() {
+	public String getHost() {
 		return host;
 	}
 
-	public void setHost(URL host) {
+	public void setHost(String host) {
 		this.host = host;
 	}
 

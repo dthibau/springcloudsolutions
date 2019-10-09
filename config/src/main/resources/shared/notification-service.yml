@@ -1,9 +1,8 @@
 server:
   port: 9090
 
-spring:
-  mail:
-    host: smtp.plbformation.com
-    port: 587
-    username: stageojen@plbformation.com
-    password: stageojen
+notification:
+  host: localhost
+  port: 2525
+  username: stageojen@plbformation.com
+  password: stageojen
