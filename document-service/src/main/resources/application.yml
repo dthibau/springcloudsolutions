@@ -38,6 +38,7 @@ management:
         - health
         - metrics
         - httptrace
+        - info
   endpoint:
     health:
       show-details: always
