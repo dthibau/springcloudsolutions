@@ -1,4 +1,5 @@
-jwtSecret: as466gf
+jwt:
+  secret: as466gf
 
 spring:
   application:

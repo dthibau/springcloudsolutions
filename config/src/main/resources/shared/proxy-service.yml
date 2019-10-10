@@ -24,7 +24,7 @@ zuul:
         path: /members-service/**
 #        serviceId: members
         stripPrefix: true
-        sensitiveHeaders: false
+        sensitiveHeaders: true
 
     documents-service:
         path: /documents-service/**
