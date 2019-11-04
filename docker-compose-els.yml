@@ -1,0 +1,142 @@
+version: "3.5"
+services:
+  config:
+    build: ./config/
+    healthcheck:
+        test: curl -f http://localhost:8888/proxy/default && echo 'cool, it works'
+        interval: 10s
+        timeout: 10s
+        retries: 5
+    networks:
+     - back
+    ports:
+     - "8888:8888"
+  annuaire:
+    build: ./annuaire/
+    networks:
+     - back
+    ports:
+     - "1111:1111"
+    depends_on: 
+      - "config"
+    restart: on-failure        
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  document-service:
+    build: ./document-service/
+    networks:
+     - back
+    depends_on: 
+      - "config"
+    restart: on-failure 
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  notification-service:
+    build: ./notification-service/
+    networks:
+     - back
+    depends_on: 
+      - "config"
+    restart: on-failure 
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  members-service:
+    build: ./members-service/
+    networks:
+      - back
+    depends_on: 
+      - "config"
+    restart: on-failure 
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  turbine:
+    build: ./turbine/
+    networks:
+      - back
+    depends_on: 
+      - "config"
+    restart: on-failure 
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+    ports:
+     - "5555:5555"
+  proxy:
+    build: ./proxy/
+    networks:
+      - front
+      - back
+    ports:
+      - 8081:8081
+    depends_on: 
+      - "config"
+    restart: on-failure 
+    labels:
+      collect_logs_with_filebeat: "true"
+      decode_log_event_to_json_object: "true"
+
+  fake-smtp:
+    build: ./fake-smtp/
+    networks:
+      - back
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+    networks:
+     - back
+    ports:
+      - "9200:9200"
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data:rw              # Persistence data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.2.0
+    networks:
+     - back
+    ports:
+      - "25826:25826"
+      - "5044:5044"
+      - "9600:9600"
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro                # Pipeline configuration
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.2.0
+    networks:
+     - back
+    ports:
+      - "5601:5601"
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.2.0
+    networks:
+     - back
+    volumes:
+      - ./filebeat/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro # Configuration file
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro           # Docker logs
+      - /var/run/docker.sock:/var/run/docker.sock:ro                       # Additional information about containers
+      - ./filebeat/data:/usr/share/filebeat/data:rw                        # Persistence data
+    user: root                                                             # Allow access to log files and docker.sock
+    restart: on-failure
+    depends_on:
+      - logstash
+
+networks:
+  back:
+  front:
