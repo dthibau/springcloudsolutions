@@ -2,8 +2,6 @@ package org.formation.rest;
 
 
 
-import java.time.LocalDateTime;
-
 import org.formation.model.Position;
 import org.formation.service.PositionService;
 import org.slf4j.Logger;
@@ -13,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import reactor.core.publisher.Mono;
 
 @RestController
 public class PositionController {
@@ -26,10 +26,11 @@ public class PositionController {
 
     @PostMapping("/position")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void position(@RequestBody Position position) {
+    public Mono<Void> position(@RequestBody Position position) {
         position.setTimestamp(System.currentTimeMillis());
 
         logger.info("Receiving position " + position);
         positionService.sendGreeting(position);
+        return Mono.empty();
     }
 }
