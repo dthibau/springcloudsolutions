@@ -12,6 +12,10 @@ feign:
     
 logging.level.org.formation.client.NotificationClient : WARN
  
+---
+spring:
+  profile: replica
 
-
+server:
+  port: 2223
   
