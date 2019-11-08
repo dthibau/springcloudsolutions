@@ -20,9 +20,6 @@ services:
     depends_on: 
       - "config"
     restart: on-failure        
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
 
   document-service:
     build: ./document-service/
@@ -64,9 +61,6 @@ services:
     depends_on: 
       - "config"
     restart: on-failure 
-    labels:
-      collect_logs_with_filebeat: "true"
-      decode_log_event_to_json_object: "true"
     ports:
      - "5555:5555"
   proxy:
