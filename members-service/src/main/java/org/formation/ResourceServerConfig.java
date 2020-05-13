@@ -30,7 +30,7 @@ private static final String RESOURCE_ID = "resource_id";
         http.authorizeRequests()
         		.antMatchers("/").hasRole("ADMIN")
         		.anyRequest().access("#oauth2.hasScope('trust')")
-//                .anyRequest().hasRole("USER")
+                .anyRequest().hasRole("USER")
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 	
