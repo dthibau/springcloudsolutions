@@ -1,7 +1,7 @@
-FROM java:8-jre
-MAINTAINER David THIBAU <david.thibau@gmail.com>
+FROM openjdk:8-jre-alpine
+VOLUME /tmp
 
-ADD ./target/proxy.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/proxy.jar"]
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 
 EXPOSE 8081

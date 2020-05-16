@@ -15,6 +15,7 @@
 	<module>config</module>
 	<module>notification-service</module>
         <module>turbine</module>
+        <module>autorization</module>
   </modules>
 
 </project>

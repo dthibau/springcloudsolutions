@@ -20,19 +20,18 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
+    authorization:
+        path: /oauth/**
+        stripPrefix: false
+        sensitiveHeaders: true
+
     members-service:
         path: /members-service/**
-#        serviceId: members
         stripPrefix: true
         sensitiveHeaders: true
 
     documents-service:
         path: /documents-service/**
-#        serviceId: documents
         stripPrefix: true
-#        sensitiveHeaders:
- 
-    authorization:
-        path: /oauth/**
-        stripPrefix: false
         sensitiveHeaders: true
+ 

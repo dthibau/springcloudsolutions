@@ -13,7 +13,7 @@ userDocumentService.factory('userDocumentService',
 					.success(callback);
 				},
 				getDocuments : function(membre,callback) {
-					$http.get('/documents-service/documents/owner/'+membre.email+'/').success(callback);
+					$http.get('/documents-service/Documents/owner/'+membre.email+'/').success(callback);
 				}
 			};
 		} );

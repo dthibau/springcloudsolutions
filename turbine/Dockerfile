@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
-MAINTAINER David THIBAU <david.thibau@gmail.com>
+VOLUME /tmp
 
-ADD ./target/turbine.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/turbine.jar"]
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 
-EXPOSE 8888
+EXPOSE 5555

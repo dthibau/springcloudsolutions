@@ -6,6 +6,9 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:/shared
+          search-locations:
+          - classpath:/shared
+          
   profiles:
     active: native
+            

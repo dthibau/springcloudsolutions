@@ -1,11 +1,10 @@
-# Spring properties
+
 spring:
   application:
-     name: documents-service   
-     
-      
+     name: documents-service  # Service registers under this name
+    
   cloud:
     config:
-      uri: http://config:8888
+      uri:
+      - http://config:8888
       fail-fast: true
-      

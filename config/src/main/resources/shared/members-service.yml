@@ -1,21 +1,10 @@
 server:
   port: 2222
-
+  
+  
 feign:
   client:
     config:
       default:
         connect-timeout: 50000
         read-timeout: 50000
-  hystrix:
-    enabled: true
-    
-logging.level.org.formation.client.NotificationClient : WARN
- 
----
-spring:
-  profile: replica
-
-server:
-  port: 2223
-  

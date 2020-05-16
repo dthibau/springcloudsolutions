@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
-import org.formation.client.Courriel;
-import org.formation.client.NotificationClient;
+import org.formation.notification.Courriel;
+import org.formation.notification.NotificationClient;
 import org.formation.repository.Member;
 import org.formation.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,14 +105,17 @@ public class MembersController {
 
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
 	public Member register(@Valid @RequestBody Member member) {
+		
+		
 		member = memberRepository.save(member);
 		
-		Courriel email = new Courriel();
-		email.setTo(member.getEmail());
-		email.setSubject("Registration");
-		email.setText("Welcome onboard !");
-
-		notificationClient.sendSimple(email);
+		Courriel courriel = new Courriel();
+		courriel.setSubject("Welcome onboard");
+		courriel.setTo(member.getEmail());
+		courriel.setText("Bienvenue au club");
+		
+		notificationClient.envoiCourrier(courriel);
+		
 		
 		return member;
 	}

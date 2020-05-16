@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM openjdk:8-jre-alpine
 MAINTAINER David THIBAU <david.thibau@gmail.com>
 
 ADD ./fakeSMTP-2.0.jar /app/
