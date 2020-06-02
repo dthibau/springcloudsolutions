@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta4
+kind: Config
+metadata:
+  name: delivery-service
+build:
+  artifacts:
+  - image: dthibau/delivery-service
+    context: .
+    jib: 
+      args:
+      - -DskipTests
+
+deploy:
+  kubectl:
+    manifests:
+    - k8s/deployment.yaml
+
