@@ -5,5 +5,16 @@ spring:
     config:
       uri: http://config:8888
       fail-fast: true
+    kubernetes:
+      config:
+        namespace: default
+        enabled: true
+        name: notification.yml
+        sources:
+         - name: application-config
+         - name: notification-config
 
+logging:
+  level: 
+    io.fabric8.kubernetes: DEBUG
 
