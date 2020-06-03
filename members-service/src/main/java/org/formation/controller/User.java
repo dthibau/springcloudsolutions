@@ -1,17 +1,17 @@
 package org.formation.controller;
 
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class User {
 
 	@NotNull
-	@Length(min = 3, max = 255)
+	@Size(min = 3, max = 255)
 	private String email;
 
 	@NotNull
-	@Length(min = 6, max = 40)
+	@Size(min = 6, max = 40)
 	private String password;
 
 	public String getEmail() {
