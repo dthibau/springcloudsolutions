@@ -4,6 +4,6 @@ server:
 notification:
   host: fake-smtp
   port: 2525
-  username: toto
+  username: ${NOTIFICATION_USERNAME}
   password: secret
 

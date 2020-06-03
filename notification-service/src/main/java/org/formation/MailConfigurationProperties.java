@@ -82,6 +82,12 @@ public class MailConfigurationProperties {
 	public void setDebug(boolean debug) {
 		this.debug = debug;
 	}
+
+	@Override
+	public String toString() {
+		return "MailConfigurationProperties [host=" + host + ", port=" + port + ", username=" + username + ", protocol="
+				+ protocol + ", auth=" + auth + ", startls=" + startls + ", debug=" + debug + "]";
+	}
 	
 	
 

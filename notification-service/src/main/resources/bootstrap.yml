@@ -4,8 +4,12 @@ spring:
   cloud:
     config:
       uri: http://config:8888
-      fail-fast: true
+#      fail-fast: true
     kubernetes:
+      secrets:
+        enabled: true
+        paths:
+        - /etc/secrets
       config:
         namespace: default
         enabled: true
