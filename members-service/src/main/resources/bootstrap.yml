@@ -22,3 +22,7 @@ spring:
          - name: application-config
          - name: members-config
   
+logging:
+  level:
+    com.netflix.hystrix: debug
+    feign: debug

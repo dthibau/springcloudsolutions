@@ -1,12 +1,24 @@
 package org.formation.notification;
 
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-@FeignClient(name="notification-service", fallback=NotificationClientFallback.class)
-public interface NotificationClient {
+@Service
+public class NotificationClient {
 
-	@RequestMapping(method = RequestMethod.POST, value="/sendSimple")
-	public String envoiCourrier(Courriel courriel);
+	
+	@Autowired
+	RestTemplateBuilder restBuilder;
+	
+	private static String NOTIFICATION_SERVICE="http://notification-service.default.svc.cluster.local:9090";
+
+	
+	public String envoiCourrier(Courriel courriel) {
+		RestTemplate restTemplate = restBuilder.rootUri(NOTIFICATION_SERVICE).build();
+
+		
+		return restTemplate.postForEntity("/sendSimple", courriel, String.class).getBody();
+	}
 }
