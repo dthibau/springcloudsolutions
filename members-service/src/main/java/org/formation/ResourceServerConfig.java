@@ -28,9 +28,10 @@ private static final String RESOURCE_ID = "resource_id";
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        		.antMatchers("/").hasRole("ADMIN")
-        		.anyRequest().access("#oauth2.hasScope('trust')") 
-        		.anyRequest().authenticated()
+        		.antMatchers("/actuator/**").permitAll()
+        		.antMatchers("/members/discovery").permitAll()
+//        		.antMatchers("/").hasRole("ADMIN")
+//        		.anyRequest().access("#oauth2.hasScope('trust')") 
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 	
