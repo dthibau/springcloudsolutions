@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Paul Chapman
  */
 @RestController
+@RequestMapping("/members")
 public class MembersController {
 
 	protected Logger logger = Logger.getLogger(MembersController.class.getName());
@@ -51,7 +52,7 @@ public class MembersController {
 	 * @throws MemberNotFoundException
 	 *             If the number is not recognised.
 	 */
-	@RequestMapping("/Members/{memberId}")
+	@RequestMapping("/{memberId}")
 	public Member byNumber(@PathVariable("memberId") long memberId) {
 
 		logger.info("Members-service byNumber() invoked: " + memberId);
@@ -75,7 +76,7 @@ public class MembersController {
 	 * @throws MemberNotFoundException
 	 *             If there are no matches at all.
 	 */
-	@RequestMapping("/Members/owner/{name}")
+	@RequestMapping("/owner/{name}")
 	public List<Member> byOwner(@PathVariable("name") String partialName) {
 		logger.info(
 				"Members-service byOwner() invoked: " + memberRepository.getClass().getName() + " for " + partialName);
@@ -89,18 +90,6 @@ public class MembersController {
 			return members;
 		}
 
-	}
-
-	@RequestMapping(path = "/authenticate", method = RequestMethod.POST)
-	public Member authenticate(@Valid @RequestBody User user) {
-		logger.info("Members-service authenticate() invoked: " + user);
-		Member member = memberRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
-
-		if (member == null)
-			throw new MemberNotFoundException("" + user.getEmail());
-		else {
-			return member;
-		}
 	}
 
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
