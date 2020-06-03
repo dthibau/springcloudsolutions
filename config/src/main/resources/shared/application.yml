@@ -1,10 +1,4 @@
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://annuaire:1111/eureka/,http://annuaire:1112/eureka/
-    healthcheck:
-      enabled: true
-    LeaseRenewalIntervalInSeconds: 5
+
 
 feign:
   hystrix:
@@ -39,3 +33,15 @@ logging:
   level:
     root: INFO   
     com.netflix.discovery: ERROR
+    
+--- 
+spring:
+  profiles: netflix
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://annuaire:1111/eureka/,http://annuaire:1112/eureka/
+    healthcheck:
+      enabled: true
+    LeaseRenewalIntervalInSeconds: 5
