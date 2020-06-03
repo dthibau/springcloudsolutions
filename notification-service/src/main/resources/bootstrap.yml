@@ -1,10 +1,8 @@
 spring:
   application:
     name: notification-service
-  cloud:
-    config:
-      uri: http://config:8888
 #      fail-fast: true
+  cloud:
     kubernetes:
       secrets:
         enabled: true
@@ -21,4 +19,11 @@ spring:
 logging:
   level: 
     io.fabric8.kubernetes: DEBUG
+    okhttp3: DEBUG
 
+---
+spring:
+  profiles: netflix
+  cloud:
+    config:
+      uri: http://config:8888

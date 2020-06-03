@@ -33,7 +33,17 @@ logging:
   level:
     root: INFO   
     com.netflix.discovery: ERROR
-    
+ 
+--- 
+spring:
+  profiles: kubernetes
+  
+management.endpoint.restart.enabled: true  
+spring.cloud.kubernetes.reload.enabled: true
+spring.cloud.kubernetes.reload.strategy: refresh   
+spring.cloud.kubernetes.reload.monitoring-config-maps: true
+#spring.cloud.kubernetes.reload.mode: polling
+
 --- 
 spring:
   profiles: netflix
