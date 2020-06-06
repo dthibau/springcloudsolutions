@@ -23,7 +23,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         image: dthibau/members-service:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
