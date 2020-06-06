@@ -11,10 +11,7 @@ spring:
 error:
   path: /error
 
-# HTTP Server
-server:
-  port: 3333   # HTTP (Tomcat) port
-  
+ 
   
 logging.level.org.springframework: INFO
 

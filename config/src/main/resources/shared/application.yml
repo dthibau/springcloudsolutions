@@ -1,8 +1,6 @@
 
 
-feign:
-  hystrix:
-    enabled: true
+
 
 spring:
   zipkin:
@@ -47,7 +45,11 @@ spring.cloud.kubernetes.reload.monitoring-config-maps: true
 --- 
 spring:
   profiles: netflix
-  
+
+feign:
+  hystrix:
+    enabled: true
+      
 eureka:
   client:
     serviceUrl:
