@@ -1,11 +1,14 @@
 # Build and Push images 
 cd notification-service
-mvn compile jib:build -Dimage=dthibau/notification-service
+mvn clean compile jib:build -Dimage=dthibau/notification-service
 cd ../members-service
-./mvnw compile jib:build -Dimage=dthibau/members-service
+./mvnw clean compile jib:build -Dimage=dthibau/members-service
 cd ../document-service
-./mvnw compile jib:build -Dimage=dthibau/documents-service
+./mvnw clean compile jib:build -Dimage=dthibau/documents-service
+cd ../autorization
+./mvnw -Pkubernetes clean compile jib:build -Dimage=dthibau/authorization-service
 cd ..
+
 
 
 #!/bin/sh

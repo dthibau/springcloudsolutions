@@ -20,8 +20,8 @@ spring:
       config:
         namespace: default
         enabled: true
-        name: notification.yml
+        name: documents.yml
         sources:
          - name: application-config
-         - name: members-config
+         - name: documents-config
       

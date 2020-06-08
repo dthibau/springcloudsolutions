@@ -17,12 +17,11 @@ spring:
       config:
         namespace: default
         enabled: true
-        name: notification.yml
+        name: members.yml
         sources:
          - name: application-config
          - name: members-config
   
 logging:
-  level:
-    com.netflix.hystrix: debug
-    feign: debug
+  level: 
+    io.fabric8.kubernetes: DEBUG

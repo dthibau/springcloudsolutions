@@ -3,18 +3,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: members-service
-  name: members-service
+    app: authorization-service
+  name: authorization-service
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: members-service
+      app: authorization-service
   template:
     metadata:
       labels:
-        app: members-service
+        app: authorization-service
     spec:
       containers:
       - env:
@@ -22,7 +22,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: dthibau/members-service:latest
+        image: dthibau/authorization-service:latest
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
@@ -54,13 +54,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: members-service
+  name: authorization-service
   labels:
-    app: members-service
+    app: authorization-service
 spec:
   type: ClusterIP
   ports:
-  - name: http-members
+  - name: http-authorization
     port: 8080
   selector:
-    app: members-service  
+    app: authorization-service  

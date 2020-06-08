@@ -7,4 +7,10 @@ server:
 
 
     
-
+---
+spring:
+  profiles: kubernetes
+  
+server:
+  port:
+    8080

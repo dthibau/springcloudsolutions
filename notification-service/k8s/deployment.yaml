@@ -78,6 +78,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 9090
+  - name: http-notification
+    port: 9090
   selector:
     app: notification-service  
