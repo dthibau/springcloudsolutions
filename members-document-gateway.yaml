@@ -1,0 +1,50 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: members-document-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: members-document
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - members-document-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /documents-service/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: documents-service
+
+  - match:
+    - uri:
+        prefix: /members-service/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: members-service
+        
+  - match:
+    - uri:
+        prefix: /zipkin
+    route:
+    - destination:
+        host: zipkin
+      
